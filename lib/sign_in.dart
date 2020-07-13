@@ -38,6 +38,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String info ="";
+
+  void doLogin(){
+    signInWithGoogle().then((FirebaseUser user){
+      setState(() {
+        info = "${user.displayName} (${user.email})";
+      });
+    }).catchError((e)=> print(e.toString()));
+  }
+
+  Future<FirebaseUser> signInWithGoogle() async {
+    GoogleSignInAccount gsia = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication gsiauth = await gsia.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.getCredential(
+        idToken: gsiauth.idToken,
+        accessToken: gsiauth.accessToken
+    );
+
+    FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,5 +198,5 @@ class Home extends StatelessWidget {
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
-Future<String> signInWithGoogle() async {}
+
 void signOutGoogle() async {}
