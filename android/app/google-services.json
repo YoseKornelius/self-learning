@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619238976429",
+    "firebase_url": "https://selflearning-351b.firebaseio.com",
+    "project_id": "selflearning-351b",
+    "storage_bucket": "selflearning-351b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619238976429:android:dbe0621a62913572120f24",
+        "android_client_info": {
+          "package_name": "com.example.sampleProject2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619238976429-ame955j0np6egvi9cksb5oa0pldnbnnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOEKqRaqfc4zGZmHYYkCBylJCRSE1v62M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619238976429-ame955j0np6egvi9cksb5oa0pldnbnnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
