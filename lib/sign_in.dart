@@ -2,22 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Raleway', primarySwatch: Colors.red),
-      home: MyHomePage(title: 'Sign In'),
+void main() => runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
+      ),
     );
-  }
-}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -38,14 +28,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String info ="";
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  String info = "";
 
-  void doLogin(){
-    signInWithGoogle().then((FirebaseUser user){
+  void doLogin() {
+    signInWithGoogle().then((FirebaseUser user) {
       setState(() {
         info = "${user.displayName} (${user.email})";
       });
-    }).catchError((e)=> print(e.toString()));
+    }).catchError((e) => print(e.toString()));
   }
 
   Future<FirebaseUser> signInWithGoogle() async {
@@ -53,11 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     GoogleSignInAuthentication gsiauth = await gsia.authentication;
 
     AuthCredential credential = GoogleAuthProvider.getCredential(
-        idToken: gsiauth.idToken,
-        accessToken: gsiauth.accessToken
-    );
+        idToken: gsiauth.idToken, accessToken: gsiauth.accessToken);
 
-    FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    FirebaseUser user =
+        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    print("ID Token: ${gsiauth.idToken}");
+    print("Access Token: ${gsiauth.accessToken}");
     return user;
   }
 
@@ -194,9 +187,5 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final GoogleSignIn googleSignIn = GoogleSignIn();
-
 
 void signOutGoogle() async {}
