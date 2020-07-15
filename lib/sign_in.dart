@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'Home.dart';
+import 'Auth.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -28,9 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   String info = "";
+  Auth auth;
 
   void doLogin() {
     signInWithGoogle().then((FirebaseUser user) {
@@ -51,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
         (await FirebaseAuth.instance.signInWithCredential(credential)).user;
     print("ID Token: ${gsiauth.idToken}");
     print("Access Token: ${gsiauth.accessToken}");
+    auth = Auth(gsiauth.idToken, user.email);
+    print(auth.toJson());
     return user;
   }
 
@@ -118,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
+                          MaterialPageRoute(builder: (context) => HomeState()),
                         );
                       },
                       color: Colors.blue,
@@ -141,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return Home();
+                                return HomeState();
                               },
                             ),
                           );
@@ -168,24 +172,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
-
-void signOutGoogle() async {}

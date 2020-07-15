@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'sign_in.dart';
+import 'Home.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/signin',
       routes: <String, WidgetBuilder>{
         '/signin': (context) => MyHomePage(),
+        '/Home': (context) => HomeState(),
       },
     );
   }
