@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'sign_in.dart';
-
-void main() => runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
-      ),
-    );
 
 @JsonSerializable()
 class Auth {
@@ -20,7 +11,7 @@ class Auth {
       : authId = json['authId'],
         email = json['email'];
 
-  Map<String, dynamic> toJson() => {
+  Map<String, String> toJson() => {
         'authId': authId,
         'email': email,
       };

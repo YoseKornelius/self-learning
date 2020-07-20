@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'sign_in.dart';
 
-void main() => runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
-      ),
-    );
-
 class HomeState extends StatefulWidget {
   HomeState({Key key, this.title}) : super(key: key);
 
@@ -30,7 +23,7 @@ class Home extends State<HomeState> {
             Navigator.of(context).pop(
               MaterialPageRoute(
                 builder: (context) {
-                  return MyHomePage();
+                  return LoginPage();
                 },
               ),
             );

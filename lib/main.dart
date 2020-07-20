@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sampleProject2/splash.dart';
 import 'sign_in.dart';
 import 'Home.dart';
 
-void main() => runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
-      ),
-    );
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/signin',
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
+      initialRoute: '/login',
       routes: <String, WidgetBuilder>{
-        '/signin': (context) => MyHomePage(),
+        '/splash': (context) => Splash(),
+        '/login': (context) => LoginPage(),
         '/Home': (context) => HomeState(),
       },
     );
